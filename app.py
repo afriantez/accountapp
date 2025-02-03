@@ -8,4 +8,15 @@ def add_expenseincome():
 
     choice = int(input("Enter your choice "))
 
+    if choice == 1:
+
+    elif choice == 2:
+
+    elif choice == 3:
+
+    elif choice == 4:
+
+    else:
+        return("Invalid choice, please try again")    
+
 add_expenseincome()
