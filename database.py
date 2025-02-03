@@ -1,7 +1,7 @@
 import sqlite3 
 
 def connect_db():
-    conn = sqlite3.connect('Transactions.db')
+    conn = sqlite3.connect('transactions.db')
     return conn
 
 def create_table():
@@ -32,3 +32,6 @@ def get_all_transactions():
     transactions = cursor.fetchall()
     conn.close()
     return transactions
+
+if __name__ == "__main__":
+    connect_db()
