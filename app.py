@@ -1,5 +1,5 @@
 import sqlite3
-from database import get_all_transactions
+from database import add_transactions, get_all_transactions
 import pandas as pd
 
 def add_expenseincome():
@@ -9,14 +9,29 @@ def add_expenseincome():
     choice = int(input("Enter your choice "))
 
     if choice == 1:
-
+        description = input("Enter expense description: ")
+        amount = float(input("Enter amount: "))
+        add_transactions(description, amount, 'expense')
+        print("Expense succesfully added")
+        
     elif choice == 2:
+        description = input("Enter income description: ")
+        amount = float(input("Enter amount: "))
+        add_transactions(description, amount, 'income')
+        print("Income succesfully added")
 
     elif choice == 3:
+        print("\nAll Transactions:")
+        transactions = get_all_transactions()
+        df = pd.DataFrame(transactions, columns=["ID", "Description", "Amount", "Type"])
+        print(df)
 
     elif choice == 4:
+        print("Exiting Application")
+        exit()
 
     else:
         return("Invalid choice, please try again")    
 
-add_expenseincome()
+if __name__ == "__main__":
+    add_expenseincome()
