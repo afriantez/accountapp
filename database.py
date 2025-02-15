@@ -5,7 +5,7 @@ def connect_db():
     return conn
 
 def create_table():
-    conn = connect_db
+    conn = connect_db()
     cursor = conn.cursor()
     cursor.execute(''' CREATE TABLE IF NOT EXISTS transactions (
         id INTEGER PRIMARY KEY AUTO INCREMENT,
@@ -18,7 +18,7 @@ def create_table():
     conn.close()
 
 def add_transactions(description, amount, type):
-    conn = connect_db
+    conn = connect_db()
     cursor = conn.cursor()
     cursor.execute("INSERT INTO transactions (description, amount, type) VALUES (?, ?, ?)",
                    (description, amount, type))
@@ -26,7 +26,7 @@ def add_transactions(description, amount, type):
     conn.close()
 
 def get_all_transactions():
-    conn = connect_db
+    conn = connect_db()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM transactions")
     transactions = cursor.fetchall()
