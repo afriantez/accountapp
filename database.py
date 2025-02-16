@@ -1,3 +1,4 @@
+import pandas as pd
 import sqlite3 
 
 def connect_db():
@@ -8,7 +9,7 @@ def create_table():
     conn = connect_db()
     cursor = conn.cursor()
     cursor.execute(''' CREATE TABLE IF NOT EXISTS transactions (
-        id INTEGER PRIMARY KEY AUTO INCREMENT,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         description TEXT,
         amount REAL,
         type TEXT,
@@ -20,18 +21,18 @@ def create_table():
 def add_transactions(description, amount, type):
     conn = connect_db()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO transactions (description, amount, type) VALUES (?, ?, ?)",
-                   (description, amount, type))
+    cursor.execute(
+        "INSERT INTO transactions (description, amount, type) VALUES (?, ?, ?)", 
+        (description, amount, type)
+        )
     conn.commit()
     conn.close()
 
 def get_all_transactions():
     conn = connect_db()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM transactions")
-    transactions = cursor.fetchall()
+    df = pd.read_sql("SELECT * FROM transactions", conn)
     conn.close()
-    return transactions
+    return print(df.head, df.columns)
 
-if __name__ == "__main__":
-    connect_db()
+print(get_all_transactions)
+
