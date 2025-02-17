@@ -32,7 +32,8 @@ def get_all_transactions():
     conn = connect_db()
     df = pd.read_sql("SELECT * FROM transactions", conn)
     conn.close()
-    return print(df.head, df.columns)
+    return df
 
-print(get_all_transactions)
-
+if __name__ == "__main__":
+    connect_db()
+    create_table()
